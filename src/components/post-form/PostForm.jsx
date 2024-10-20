@@ -12,7 +12,7 @@ export const PostForm = ({ post }) => {
   const { register, handleSubmit, watch, setValue, getValues, control } = useForm({
     defaultValues: {
       title: post?.title || "",
-      slug: post?.slug || "",
+      slug: post?.$id || "",
       content: post?.content || "",
       status: post?.status || "active",
     },
@@ -56,18 +56,18 @@ export const PostForm = ({ post }) => {
   };
 
   const slugTransform = useCallback((value) => {
-    if (value && typeof value == "string") {
+    if (value && typeof value === "string") {
       return value
         .trim()
         .toLowerCase()
-        .replace(/^[a-zA-Z\d\s]+/g, "-")
+        .replace(/[^a-zA-Z\d\s]+/g, "-")
         .replace(/\s/g, "-");
     }
     return "";
   }, []);
 
   useEffect(() => {
-    const subscription = watch((value, name) => {
+    const subscription = watch((value, {name}) => {
       if (name === "title") {
         setValue("slug", slugTransform(value.title, { shouldValidate: true }));
       }

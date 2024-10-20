@@ -6,15 +6,15 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 
 function EditPost() {
-    const [posts, setPosts] = useState(null)
+    const [post, setPosts] = useState(null)
     const {slug} = useParams()
     const navigate = useNavigate()
 
     useEffect(()=> {
         if(slug){
-            appwriteService.getPost(slug).then((posts)=>{
-                if(posts){
-                    setPosts(posts)
+            appwriteService.getPost(slug).then((post)=>{
+                if(post){
+                    setPosts(post)
                 }
             })
         }
@@ -22,10 +22,10 @@ function EditPost() {
             navigate('/')
         }
     }, [slug, navigate])
-  return posts ? (
+  return post ? (
     <div className='py-8'>
         <Container>
-            <PostForm posts = {posts}/>
+            <PostForm post = {post}/>
         </Container>
     </div>
   ) : null

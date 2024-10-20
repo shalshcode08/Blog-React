@@ -2,10 +2,11 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import appwriteService from "../appwrite/configService";
 import Container from "./../components/container/Container";
 import Button from "../components/Button";
+import parse from "html-react-parser";
 
 function Post() {
   const [post, setPost] = useState(null);
@@ -29,6 +30,16 @@ function Post() {
       navigate("/");
     }
   }, [slug, navigate]);
+
+  const deletePost = () => {
+    appwriteService.deletePost(post.$id).then((status)=>{
+     if(status){
+      appwriteService.deleteFile(post.featuredImage);
+      navigate("/")
+     }
+    })
+  }
+
   return post ? (
     <div className="py-8">
       <Container>
