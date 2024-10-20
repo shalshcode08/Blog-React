@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export const PostForm = ({ post }) => {
-  const { register, handleSubmit, watch, setValue, getValues } = useForm({
+  const { register, handleSubmit, watch, setValue, getValues, control } = useForm({
     defaultValues: {
       title: post?.title || "",
       slug: post?.slug || "",
@@ -19,7 +19,7 @@ export const PostForm = ({ post }) => {
   });
 
   const navigate = useNavigate();
-  const userData = useSelector((state) => state.user.userData);
+  const userData = useSelector((state) => state.auth.userData);
 
   const submit = async (data) => {
     if (post) {
@@ -101,7 +101,7 @@ export const PostForm = ({ post }) => {
         <RTE
           label="Content :"
           name="content"
-          control={control}
+          control= {control}
           defaultValue={getValues("content")}
         />
       </div>
@@ -123,7 +123,7 @@ export const PostForm = ({ post }) => {
           </div>
         )}
         <Select
-          options={["active", "inactive"]}
+          options={["active", "not-active"]}
           label="Status"
           className="mb-4"
           {...register("status", { required: true })}

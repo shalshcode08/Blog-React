@@ -7,8 +7,8 @@ import store from "./store/store.js";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
 import Protected from "./components/AuthLayout";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
+import LoginPage from "./pages/Login";
+import SignupPage from "./pages/Signup";
 import AllPosts from "./pages/AllPosts";
 import EditPost from "./pages/EditPost";
 import AddPost from "./pages/AddPost";
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
         path: "/login",
         element: (
           <Protected authentication={false}>
-            <Login />
+            <LoginPage />
           </Protected>
         ),
       },
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
         path: "/signup",
         element: (
           <Protected authentication={false}>
-            <Signup />
+            <SignupPage />
           </Protected>
         ),
       },

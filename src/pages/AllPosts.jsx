@@ -4,7 +4,7 @@ import Container from './../components/container/Container';
 import { PostForm } from './../components/post-form/PostForm';
 
 function AllPosts() {
-    conts [post , setPost] = useState([]);
+    const [post , setPost] = useState([]);
     useEffect(()=>{}, [])
     appwriteService.getAllPost([]).then((post)=> {
         if(post){
